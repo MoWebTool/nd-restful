@@ -31,6 +31,14 @@ module.exports = {
     });
   },
 
+  PUT: function(id, data) {
+    return this.get('proxy')({
+      type: 'PUT',
+      uri: id,
+      data: data
+    });
+  },
+
   PATCH: function(id, data) {
     return this.get('proxy')({
       type: 'PATCH',
