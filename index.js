@@ -5,48 +5,64 @@
 
 'use strict';
 
-module.exports = {
+var RESTful = {
 
-  LIST: function(data) {
-    return this.get('proxy')({
+  LIST: function(data, params) {
+    return this.get('proxy').call(this, {
       type: 'GET',
       // uri: null,
-      data: data
+      data: data,
+      params: params
     });
   },
 
-  GET: function(id, data) {
-    return this.get('proxy')({
+  GET: function(id, data, params) {
+    return this.get('proxy').call(this, {
       type: 'GET',
       uri: id,
-      data: data
+      data: data,
+      params: params
     });
   },
 
-  POST: function(data) {
-    return this.get('proxy')({
+  POST: function(data, params) {
+    return this.get('proxy').call(this, {
       type: 'POST',
       // uri: null,
-      data: data
+      data: data,
+      params: params
     });
   },
 
-  PATCH: function(id, data) {
-    return this.get('proxy')({
+  PUT: function(id, data, params) {
+    return this.get('proxy').call(this, {
+      type: 'PUT',
+      uri: id,
+      data: data,
+      params: params
+    });
+  },
+
+  PATCH: function(id, data, params) {
+    return this.get('proxy').call(this, {
       type: 'PATCH',
       uri: id,
-      data: data
+      data: data,
+      params: params
     });
   },
 
-  DELETE: function(id, data) {
-    return this.get('proxy')({
+  DELETE: function(id, data, params) {
+    return this.get('proxy').call(this, {
       type: 'DELETE',
       uri: id,
-      data: data
+      data: data,
+      params: params
     });
   }
 };
 
 // alias
-module.exports.GETALL = module.exports.ALL = module.exports.LIST;
+RESTful.GETALL = RESTful.ALL = RESTful.LIST;
+
+module.exports = RESTful;
