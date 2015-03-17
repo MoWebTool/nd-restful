@@ -5,64 +5,56 @@
 
 'use strict';
 
-var RESTful = {
+module.exports = {
 
-  LIST: function(data, params) {
-    return this.get('proxy').call(this, {
+  LIST: function(data) {
+    return this.get('proxy')({
       type: 'GET',
       // uri: null,
-      data: data,
-      params: params
+      data: data
     });
   },
 
-  GET: function(id, data, params) {
-    return this.get('proxy').call(this, {
+  GET: function(id, data) {
+    return this.get('proxy')({
       type: 'GET',
       uri: id,
-      data: data,
-      params: params
+      data: data
     });
   },
 
-  POST: function(data, params) {
-    return this.get('proxy').call(this, {
+  POST: function(data) {
+    return this.get('proxy')({
       type: 'POST',
       // uri: null,
-      data: data,
-      params: params
+      data: data
     });
   },
 
-  PUT: function(id, data, params) {
-    return this.get('proxy').call(this, {
+  PUT: function(id, data) {
+    return this.get('proxy')({
       type: 'PUT',
       uri: id,
-      data: data,
-      params: params
+      data: data
     });
   },
 
-  PATCH: function(id, data, params) {
-    return this.get('proxy').call(this, {
+  PATCH: function(id, data) {
+    return this.get('proxy')({
       type: 'PATCH',
       uri: id,
-      data: data,
-      params: params
+      data: data
     });
   },
 
-  DELETE: function(id, data, params) {
-    return this.get('proxy').call(this, {
+  DELETE: function(id, data) {
+    return this.get('proxy')({
       type: 'DELETE',
       uri: id,
-      data: data,
-      params: params
+      data: data
     });
   }
 };
 
 // alias
-RESTful.GETALL = RESTful.ALL = RESTful.LIST;
-
-module.exports = RESTful;
+module.exports.GETALL = module.exports.ALL = module.exports.LIST;
