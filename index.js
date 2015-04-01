@@ -9,6 +9,7 @@ var RESTful = {
 
   LIST: function(data, params) {
     return this.get('proxy').call(this, {
+      baseUri: this.get('baseUri'),
       type: 'GET',
       // uri: null,
       data: data,
@@ -18,6 +19,7 @@ var RESTful = {
 
   GET: function(id, data, params) {
     return this.get('proxy').call(this, {
+      baseUri: this.get('baseUri'),
       type: 'GET',
       uri: id,
       data: data,
@@ -27,6 +29,7 @@ var RESTful = {
 
   POST: function(data, params) {
     return this.get('proxy').call(this, {
+      baseUri: this.get('baseUri'),
       type: 'POST',
       // uri: null,
       data: data,
@@ -36,6 +39,7 @@ var RESTful = {
 
   PUT: function(id, data, params) {
     return this.get('proxy').call(this, {
+      baseUri: this.get('baseUri'),
       type: 'PUT',
       uri: id,
       data: data,
@@ -45,6 +49,7 @@ var RESTful = {
 
   PATCH: function(id, data, params) {
     return this.get('proxy').call(this, {
+      baseUri: this.get('baseUri'),
       type: 'PATCH',
       uri: id,
       data: data,
@@ -54,6 +59,7 @@ var RESTful = {
 
   DELETE: function(id, data, params) {
     return this.get('proxy').call(this, {
+      baseUri: this.get('baseUri'),
       type: 'DELETE',
       uri: id,
       data: data,
