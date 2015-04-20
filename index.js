@@ -5,66 +5,146 @@
 
 'use strict';
 
+/*jshint maxparams:4*/
+
+function parseArgs(params, additional) {
+  var options = {};
+
+  if (params) {
+    if (Array.isArray(params)) {
+      options.params = params;
+    } else {
+      options.additional = additional;
+    }
+  }
+
+  if (additional) {
+    options.additional = additional;
+  }
+
+  return options;
+}
+
+function extend(target, source) {
+  Object.keys(source).forEach(function(key) {
+    target[key] = source[key];
+  });
+
+  return target;
+}
+
 var RESTful = {
 
-  LIST: function(data, params) {
-    return this.get('proxy').call(this, {
-      baseUri: this.get('baseUri'),
-      type: 'GET',
-      // uri: null,
-      data: data,
-      params: params
-    });
+  /**
+   * LIST
+   * @param {object} [data]       表单数据，以查询参数形式拼接到请求地址
+   * @param {array}  [params]     以路径形式拼接到请求地址
+   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   */
+  LIST: function(data, params, additional) {
+    return this.get('proxy').call(this, extend(
+      parseArgs(params, additional),
+      {
+        baseUri: this.get('baseUri'),
+        type: 'GET',
+        // uri: null,
+        data: data
+      }
+    ));
   },
 
-  GET: function(id, data, params) {
-    return this.get('proxy').call(this, {
-      baseUri: this.get('baseUri'),
-      type: 'GET',
-      uri: id,
-      data: data,
-      params: params
-    });
+  /**
+   * GET
+   * @param {string} id           资源 ID
+   * @param {object} [data]       表单数据，以查询参数形式拼接到请求地址
+   * @param {array}  [params]     以路径形式拼接到请求地址
+   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   */
+  GET: function(id, data, params, additional) {
+    return this.get('proxy').call(this, extend(
+      parseArgs(params, additional),
+      {
+        baseUri: this.get('baseUri'),
+        type: 'GET',
+        uri: id,
+        data: data
+      }
+    ));
   },
 
-  POST: function(data, params) {
-    return this.get('proxy').call(this, {
-      baseUri: this.get('baseUri'),
-      type: 'POST',
-      // uri: null,
-      data: data,
-      params: params
-    });
+  /**
+   * POST
+   * @param {object} data         表单数据
+   * @param {array}  [params]     以路径形式拼接到请求地址
+   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   */
+  POST: function(data, params, additional) {
+    return this.get('proxy').call(this, extend(
+      parseArgs(params, additional),
+      {
+        baseUri: this.get('baseUri'),
+        type: 'POST',
+        // uri: null,
+        data: data
+      }
+    ));
   },
 
-  PUT: function(id, data, params) {
-    return this.get('proxy').call(this, {
-      baseUri: this.get('baseUri'),
-      type: 'PUT',
-      uri: id,
-      data: data,
-      params: params
-    });
+  /**
+   * PUT
+   * @param {string} id           资源 ID
+   * @param {object} data         表单数据，以查询参数形式拼接到请求地址
+   * @param {array}  [params]     以路径形式拼接到请求地址
+   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   */
+  PUT: function(id, data, params, additional) {
+    return this.get('proxy').call(this, extend(
+      parseArgs(params, additional),
+      {
+        baseUri: this.get('baseUri'),
+        type: 'PUT',
+        uri: id,
+        data: data
+      }
+    ));
   },
 
-  PATCH: function(id, data, params) {
-    return this.get('proxy').call(this, {
-      baseUri: this.get('baseUri'),
-      type: 'PATCH',
-      uri: id,
-      data: data,
-      params: params
-    });
+  /**
+   * PATCH
+   * @param {string} id           资源 ID
+   * @param {object} data         表单数据
+   * @param {array}  [params]     以路径形式拼接到请求地址
+   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   */
+  PATCH: function(id, data, params, additional) {
+    return this.get('proxy').call(this, extend(
+      parseArgs(params, additional),
+      {
+        baseUri: this.get('baseUri'),
+        type: 'PATCH',
+        uri: id,
+        data: data
+      }
+    ));
   },
 
-  DELETE: function(id, data, params) {
-    return this.get('proxy').call(this, {
-      baseUri: this.get('baseUri'),
-      type: 'DELETE',
-      uri: id,
-      data: data,
-      params: params
-    });
+  /**
+   * DELETE
+   * @param {string} id           资源 ID
+   * @param {object} [data]       表单数据
+   * @param {array}  [params]     以路径形式拼接到请求地址
+   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   */
+  DELETE: function(id, data, params, additional) {
+    return this.get('proxy').call(this, extend(
+      parseArgs(params, additional),
+      {
+        baseUri: this.get('baseUri'),
+        type: 'DELETE',
+        uri: id,
+        data: data
+      }
+    ));
   }
 };
 
