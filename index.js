@@ -5,150 +5,131 @@
 
 'use strict';
 
-/*jshint maxparams:4*/
-
-function parseArgs(params, additional) {
-  var options = {};
-
-  if (params) {
-    if (Array.isArray(params)) {
-      options.params = params;
-    } else {
-      options.additional = additional;
-    }
-  }
-
-  if (additional) {
-    options.additional = additional;
-  }
-
-  return options;
-}
-
 function extend(target, source) {
-  Object.keys(source).forEach(function(key) {
+  source && Object.keys(source).forEach(function(key) {
     target[key] = source[key];
   });
 
   return target;
 }
 
+/**
+ * 参数 options 说明
+ *
+ * {string} uri            资源 ID
+ * {object} data           表单数据，以查询参数形式拼接到请求地址
+ * {array}  params         以路径形式拼接到请求地址
+ * {object} additional     以查询参数形式拼接到请求地址
+ * {object} replacement    用于替换 url 中的变量
+ */
+
 var RESTful = {
 
   /**
-   * LIST
-   * @param {object} [data]       表单数据，以查询参数形式拼接到请求地址
-   * @param {array}  [params]     以路径形式拼接到请求地址
-   * @param {object} [additional] 以查询参数形式拼接到请求地址
-   */
-  LIST: function(data, params, additional) {
-    return this.get('proxy').call(this, extend(
-      parseArgs(params, additional),
-      {
-        baseUri: this.get('baseUri'),
-        type: 'GET',
-        // uri: null,
-        data: data
-      }
-    ));
-  },
-
-  /**
    * GET
-   * @param {string} id           资源 ID
-   * @param {object} [data]       表单数据，以查询参数形式拼接到请求地址
-   * @param {array}  [params]     以路径形式拼接到请求地址
-   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   * @param {object|string|number} options        参数
    */
-  GET: function(id, data, params, additional) {
+  GET: function(options) {
+    if (typeof options === 'string' || typeof options === 'number') {
+      options = {
+        uri: options
+      };
+    }
+
     return this.get('proxy').call(this, extend(
-      parseArgs(params, additional),
       {
         baseUri: this.get('baseUri'),
-        type: 'GET',
-        uri: id,
-        data: data
-      }
+        type: 'GET'
+      }, options
     ));
   },
 
   /**
    * POST
-   * @param {object} data         表单数据
-   * @param {array}  [params]     以路径形式拼接到请求地址
-   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   * @param {object} options        参数
    */
-  POST: function(data, params, additional) {
+  POST: function(options) {
     return this.get('proxy').call(this, extend(
-      parseArgs(params, additional),
       {
         baseUri: this.get('baseUri'),
-        type: 'POST',
-        // uri: null,
-        data: data
-      }
+        type: 'POST'
+      }, options
     ));
   },
 
   /**
    * PUT
-   * @param {string} id           资源 ID
-   * @param {object} data         表单数据，以查询参数形式拼接到请求地址
-   * @param {array}  [params]     以路径形式拼接到请求地址
-   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   * @param {object} options        参数
+   * @param {object} data           参数
    */
-  PUT: function(id, data, params, additional) {
+  PUT: function(options, data) {
+    if (typeof options === 'string' || typeof options === 'number') {
+      options = {
+        uri: options
+      };
+    }
+
+    if (data) {
+      options.data = data;
+    }
+
     return this.get('proxy').call(this, extend(
-      parseArgs(params, additional),
       {
         baseUri: this.get('baseUri'),
-        type: 'PUT',
-        uri: id,
-        data: data
-      }
+        type: 'PUT'
+      }, options
     ));
   },
 
   /**
    * PATCH
-   * @param {string} id           资源 ID
-   * @param {object} data         表单数据
-   * @param {array}  [params]     以路径形式拼接到请求地址
-   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   * @param {object} options        参数
+   * @param {object} data           参数
    */
-  PATCH: function(id, data, params, additional) {
+  PATCH: function(options, data) {
+    if (typeof options === 'string' || typeof options === 'number') {
+      options = {
+        uri: options
+      };
+    }
+
+    if (data) {
+      options.data = data;
+    }
+
     return this.get('proxy').call(this, extend(
-      parseArgs(params, additional),
       {
         baseUri: this.get('baseUri'),
-        type: 'PATCH',
-        uri: id,
-        data: data
-      }
+        type: 'PATCH'
+      }, options
     ));
   },
 
   /**
    * DELETE
-   * @param {string} id           资源 ID
-   * @param {object} [data]       表单数据
-   * @param {array}  [params]     以路径形式拼接到请求地址
-   * @param {object} [additional] 以查询参数形式拼接到请求地址
+   * @param {object|string|number} options        参数
    */
-  DELETE: function(id, data, params, additional) {
+  DELETE: function(options) {
+    if (typeof options === 'string' || typeof options === 'number') {
+      options = {
+        uri: options
+      };
+    }
+
     return this.get('proxy').call(this, extend(
-      parseArgs(params, additional),
       {
         baseUri: this.get('baseUri'),
-        type: 'DELETE',
-        uri: id,
-        data: data
-      }
+        type: 'DELETE'
+      }, options
     ));
   }
 };
 
-// alias
-RESTful.GETALL = RESTful.ALL = RESTful.LIST;
+/**
+ * GETALL
+ * ALL
+ * LIST
+ */
+RESTful.GETALL = RESTful.ALL = RESTful.LIST = RESTful.GET;
 
 module.exports = RESTful;
