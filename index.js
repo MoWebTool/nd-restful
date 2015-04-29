@@ -36,6 +36,8 @@ var RESTful = {
       };
     }
 
+    this.trigger('GET', options);
+
     return this.get('proxy').call(this, extend(
       {
         baseUri: this.get('baseUri'),
@@ -49,6 +51,8 @@ var RESTful = {
    * @param {object} options        参数
    */
   POST: function(options) {
+    this.trigger('POST', options);
+
     return this.get('proxy').call(this, extend(
       {
         baseUri: this.get('baseUri'),
@@ -63,6 +67,8 @@ var RESTful = {
    * @param {object} data           参数
    */
   PUT: function(options, data) {
+    this.trigger('PUT', options);
+
     if (typeof options === 'string' || typeof options === 'number') {
       options = {
         uri: options
@@ -97,6 +103,8 @@ var RESTful = {
       options.data = data;
     }
 
+    this.trigger('PATCH', options);
+
     return this.get('proxy').call(this, extend(
       {
         baseUri: this.get('baseUri'),
@@ -115,6 +123,8 @@ var RESTful = {
         uri: options
       };
     }
+
+    this.trigger('DELETE', options);
 
     return this.get('proxy').call(this, extend(
       {
