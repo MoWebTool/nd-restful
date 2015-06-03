@@ -67,8 +67,6 @@ var RESTful = {
    * @param {object} data           参数
    */
   PUT: function(options, data) {
-    this.trigger('PUT', options);
-
     if (typeof options === 'string' || typeof options === 'number') {
       options = {
         uri: options
@@ -78,6 +76,8 @@ var RESTful = {
     if (data) {
       options.data = data;
     }
+    
+    this.trigger('PUT', options);
 
     return this.get('proxy').call(this, extend(
       {
