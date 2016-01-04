@@ -1,6 +1,6 @@
 /**
- * @module: nd-restful
- * @author: crossjs <liwenfu@crossjs.com> - 2015-03-02 19:52:36
+ * @module Restful
+ * @author crossjs <liwenfu@crossjs.com>
  */
 
 'use strict';
@@ -26,6 +26,12 @@ function extend(target, source) {
 var RESTful = {
 
   /**
+   * @protected
+   * request: function(options) {
+   * },
+   */
+
+  /**
    * GET
    * @param {object|string|number} options        参数
    */
@@ -34,16 +40,15 @@ var RESTful = {
       options = {
         uri: options
       };
+    } else if (!options) {
+      options = {};
     }
 
-    this.trigger('GET', options);
+    // this.trigger('GET', options);
 
-    return this.get('proxy').call(this, extend(
-      {
-        baseUri: this.get('baseUri'),
-        type: 'GET'
-      }, options
-    ));
+    return this.request(extend({
+      type: 'GET'
+    }, options));
   },
 
   /**
@@ -51,14 +56,15 @@ var RESTful = {
    * @param {object} options        参数
    */
   POST: function(options) {
-    this.trigger('POST', options);
+    if (!options) {
+      options = {};
+    }
 
-    return this.get('proxy').call(this, extend(
-      {
-        baseUri: this.get('baseUri'),
-        type: 'POST'
-      }, options
-    ));
+    // this.trigger('POST', options);
+
+    return this.request(extend({
+      type: 'POST'
+    }, options));
   },
 
   /**
@@ -71,20 +77,19 @@ var RESTful = {
       options = {
         uri: options
       };
+    } else if (!options) {
+      options = {};
     }
 
     if (data) {
       options.data = data;
     }
-    
-    this.trigger('PUT', options);
 
-    return this.get('proxy').call(this, extend(
-      {
-        baseUri: this.get('baseUri'),
-        type: 'PUT'
-      }, options
-    ));
+    // this.trigger('PUT', options);
+
+    return this.request(extend({
+      type: 'PUT'
+    }, options));
   },
 
   /**
@@ -97,20 +102,19 @@ var RESTful = {
       options = {
         uri: options
       };
+    } else if (!options) {
+      options = {};
     }
 
     if (data) {
       options.data = data;
     }
 
-    this.trigger('PATCH', options);
+    // this.trigger('PATCH', options);
 
-    return this.get('proxy').call(this, extend(
-      {
-        baseUri: this.get('baseUri'),
-        type: 'PATCH'
-      }, options
-    ));
+    return this.request(extend({
+      type: 'PATCH'
+    }, options));
   },
 
   /**
@@ -122,16 +126,15 @@ var RESTful = {
       options = {
         uri: options
       };
+    } else if (!options) {
+      options = {};
     }
 
-    this.trigger('DELETE', options);
+    // this.trigger('DELETE', options);
 
-    return this.get('proxy').call(this, extend(
-      {
-        baseUri: this.get('baseUri'),
-        type: 'DELETE'
-      }, options
-    ));
+    return this.request(extend({
+      type: 'DELETE'
+    }, options));
   }
 };
 
