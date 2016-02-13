@@ -44,8 +44,6 @@ var RESTful = {
       options = {};
     }
 
-    // this.trigger('GET', options);
-
     return this.request(extend({
       type: 'GET'
     }, options));
@@ -59,8 +57,6 @@ var RESTful = {
     if (!options) {
       options = {};
     }
-
-    // this.trigger('POST', options);
 
     return this.request(extend({
       type: 'POST'
@@ -85,8 +81,6 @@ var RESTful = {
       options.data = data;
     }
 
-    // this.trigger('PUT', options);
-
     return this.request(extend({
       type: 'PUT'
     }, options));
@@ -110,8 +104,6 @@ var RESTful = {
       options.data = data;
     }
 
-    // this.trigger('PATCH', options);
-
     return this.request(extend({
       type: 'PATCH'
     }, options));
@@ -129,8 +121,6 @@ var RESTful = {
     } else if (!options) {
       options = {};
     }
-
-    // this.trigger('DELETE', options);
 
     return this.request(extend({
       type: 'DELETE'
